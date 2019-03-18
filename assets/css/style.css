@@ -30,5 +30,13 @@ body{
     border: 1px solid black;
     background: blue;
     opacity: 0.3;
+    cursor: pointer;
+}
+
+.startOver:hover{
+    border: 1px solid black;
+    background: blue;
+    opacity: 0.3;
+    cursor: pointer;
 }
 

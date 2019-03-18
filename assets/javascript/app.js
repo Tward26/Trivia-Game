@@ -4,7 +4,6 @@ $(document).ready(function () {
     var corrCount = 0;
     var incorrCount = 0;
     var unansCount = 0;
-    var timeRemaining = 30;
     questionCount = 0;
     var questionList = [];
     var questionDisplay = $("<div>");
@@ -17,6 +16,9 @@ $(document).ready(function () {
     var time = 30;
     var timerSelect = $("#timer");
     var intervalId;
+    var startVisible = true;
+    var attach;
+    var timeout;
 
     questionList.push(objConstructor("What is 1+1?", ["one", "two", "three", "four"], "two"));
     questionList.push(objConstructor("What is the third letter of the alphabet?", ["A", "B", "C", "D"], "C"));
@@ -34,7 +36,10 @@ $(document).ready(function () {
 
     function startGame() {
         console.log("it worked!");
-        $("#startButton").css("display", "none");
+        if (startVisible) {
+            $("#startButton").css("display", "none");
+            startVisible = false;
+        }
         $(".hidden").css("display", "block");
         resetClock();
         question.text(questionList[questionCount].question);
@@ -49,29 +54,40 @@ $(document).ready(function () {
         incorrCount = 0;
         unansCount = 0;
         questionCount = 0;
+        $("#gameSpace").empty();
+        $("#gameSpace").append(attach);
+        startGame();
     }
 
     function correctAnswer() {
         corrCount++;
+        intermission("correct");
         changeQuestion();
     }
 
     function wrongAnswer() {
         incorrCount++;
+        intermission("incorrect")
         changeQuestion();
     }
 
     function noAnswer() {
         unansCount++;
-        changeQuestion();
+        intermission("unanswered")
     }
 
     function changeQuestion() {
         questionCount++;
-        if (questionCount === (questionList.length)){
+        if (questionCount === (questionList.length)) {
             clearInterval(intervalId);
-            $("#questionSpace").empty();
-            $("#questionSpace").html(`All done here's how you did!<p>Correct Answers: ${corrCount}</p><p>Incorrect Answers: ${incorrCount}</p><p>Unanswered: ${unansCount}</p>`);
+            attach = $("#questionSpace").detach();
+            $("#gameSpace").html(`All done here's how you did!<p>Correct Answers: ${corrCount}</p><p>Incorrect Answers: ${incorrCount}</p><p>Unanswered: ${unansCount}</p>`);
+            var resetButton = $("<p>").text("Start Over?").addClass("startOver");
+            resetButton.click(function () {
+                resetGame();
+            });
+            $("#gameSpace").append(resetButton);
+
         }
         else {
             resetClock();
@@ -83,21 +99,41 @@ $(document).ready(function () {
         }
     }
 
-    function decrement() {
-        time--;
-        timerSelect.text(time);
-        if (time === 0) {
-            clearInterval(intervalId);
-            noAnswer();
-        }
-    }
-
-    function resetClock(){
+    function resetClock() {
         time = 30;
         timerSelect.text(time);
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);
+
+        function decrement() {
+            time--;
+            timerSelect.text(time);
+            if (time === 0) {
+                clearInterval(intervalId);
+                noAnswer();
+            }
+        }
     }
+
+    function intermission(response){
+        if(response === "correct")
+        {
+            clearInterval(intervalId);
+            changeQuestion();
+        }
+        else if(response === "incorrect"){
+            clearInterval(intervalId);
+            changeQuestion();
+        }
+        else if(response === "unanswered"){
+            clearInterval(intervalId);
+            changeQuestion();
+        }
+
+    }
+
+
+    // on click functionality
 
     $("#startButton").click(function () {
         startGame();
