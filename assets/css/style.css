@@ -9,15 +9,26 @@ body{
 #container{
     margin: 0 auto;
     text-align: center;
-    background-color: green;
-    opacity: 0.5;
+    background: rgba(76, 175, 80, 0.5);
     padding: 20px 150px 300px 150px;
 }
 
-#gameContent{
+#gameSpace{
     margin: 0 auto;
     text-align: center;
     width: 100%;
     padding-top: 50px;
+}
+
+
+
+.hidden{
+    display: none;
+}
+
+.choice:hover{
+    border: 1px solid black;
+    background: blue;
+    opacity: 0.3;
 }
 
