@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("../images/skulls.png");
+}
+
+#container{
+    margin: 0 auto;
+    text-align: center;
+    background-color: green;
+    opacity: 0.5;
+    padding: 20px 150px 300px 150px;
+}
+
+#gameContent{
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    padding-top: 50px;
+}
+
