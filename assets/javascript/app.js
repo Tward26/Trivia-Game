@@ -62,13 +62,11 @@ $(document).ready(function () {
     function correctAnswer() {
         corrCount++;
         intermission("correct");
-        changeQuestion();
     }
 
     function wrongAnswer() {
         incorrCount++;
         intermission("incorrect")
-        changeQuestion();
     }
 
     function noAnswer() {
@@ -77,7 +75,7 @@ $(document).ready(function () {
     }
 
     function changeQuestion() {
-        questionCount++;
+        ++questionCount;
         if (questionCount === (questionList.length)) {
             clearInterval(intervalId);
             attach = $("#questionSpace").detach();
@@ -115,19 +113,32 @@ $(document).ready(function () {
         }
     }
 
-    function intermission(response){
-        if(response === "correct")
-        {
+    function clearQuestion() {
+        question.text("");
+        choice1.text("");
+        choice2.text("");
+        choice3.text("");
+        choice4.text("");
+    }
+
+    function intermission(response) {
+        if (response === "correct") {
             clearInterval(intervalId);
-            changeQuestion();
+            clearQuestion();
+            question.html("Correct!");
+            timeout = setTimeout(changeQuestion, 5000);
         }
-        else if(response === "incorrect"){
+        else if (response === "incorrect") {
             clearInterval(intervalId);
-            changeQuestion();
+            clearQuestion();
+            question.html(`Nope!<p>The Correct Answer was: ${questionList[questionCount].correctChoice}</p>`);
+            timeout = setTimeout(changeQuestion, 5000);
         }
-        else if(response === "unanswered"){
+        else if (response === "unanswered") {
             clearInterval(intervalId);
-            changeQuestion();
+            clearQuestion();
+            question.html(`Out of Time!<p>The Correct Answer was: ${questionList[questionCount].correctChoice}</p>`)
+            timeout = setTimeout(changeQuestion, 5000);
         }
 
     }
