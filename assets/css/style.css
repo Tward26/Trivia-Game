@@ -54,9 +54,9 @@ body{
 #gameSpace{
     background: rgba(76,61,104, 0.90);
     /* margin: 0 auto; */
-    width: 100%;
+    width: 800px;
     padding-top: 25px;
-    min-height: 400px;
+    min-height: 450px;
 }
 
 .hiddenTimer{
@@ -89,5 +89,10 @@ li{
     font-family: 'waltograph_uibold', serif;
     font-weight:normal;
     font-style:normal;
+}
+
+.imgMax{
+    max-height: 300px;
+    max-width: 300px;
 }
 

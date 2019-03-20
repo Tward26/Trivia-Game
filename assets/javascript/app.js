@@ -19,10 +19,20 @@ $(document).ready(function () {
 
     //push objects into array using objConstructor function
 
-    questionList.push(objConstructor("What is 1+1?", ["one", "two", "three", "four"], "two", "https://via.placeholder.com/150"));
-    questionList.push(objConstructor("What is the third letter of the alphabet?", ["a", "b", "c", "d"], "c", "https://via.placeholder.com/150"));
-    questionList.push(objConstructor("What color is the sky", ["blue", "potato", "green", "yes"], "blue", "https://via.placeholder.com/150"));
-    questionList.push(objConstructor("What is my name?", ["frank", "beans", "hugo", "tyler"], "tyler", "https://via.placeholder.com/150"));
+    questionList.push(objConstructor("Which hyena was Whoopi Goldberg the voice of in The Lion King?", ["shenzi", "banzai", "ed", "scar"], "shenzi", "assets/images/hyenas.gif"));
+    questionList.push(objConstructor("What other name does Dr. Facilier go by in the Princess and the Frog?", ["dr. voodoo", "mr. shadow", "shadow man", "chernabog"], "shadow man", "assets/images/drFacilier.gif"));
+    questionList.push(objConstructor("In Fantasia, what song is associated with Chernabog?", ["rite of spring", "night on bald mountain", "nutcracker suite", "sorcerer's apprentice"], "night on bald mountain", "assets/images/chernabog.gif"));
+    questionList.push(objConstructor("At the end of Emperor's New Groove, what animal does Yzma end up turned into?", ["llama", "alligator", "flea", "cat"], "cat", "assets/images/yzma.gif"));
+    questionList.push(objConstructor("Who is the god of the underworld in Hercules?", ["zeus", "apollo", "hades", "pan"], "hades", "assets/images/hades.gif"));
+    questionList.push(objConstructor("In Alice in Wonderland, what card suit was the Red Queen?", ["hearts", "spades", "diamonds", "clubs"], "hearts", "assets/images/redqueen.gif"));
+    questionList.push(objConstructor("What is Shere Khan afraid of in The Jungle Book?", ["humans", "bears", "thunder", "fire"], "fire", "assets/images/shereKhan.gif"));
+    questionList.push(objConstructor("What is the name of merlin's nemesis in The Sword in the Stone?", ["madame maleficent", "madame mim", "the crone", "wort"], "madame mim", "assets/images/madameMim.gif"));
+    questionList.push(objConstructor("Who is the poacher in Rescuers Down Under?", ["marahute", "joanna", "steven j. irwin", "percival c. mcleach"], "percival c. mcleach", "assets/images/mcleach.gif"));
+    questionList.push(objConstructor("What is the name of Gaston's sidekick in Beauty and the Beast", ["olaf", "lefou", "gaston jr.", "cogsworth"], "lefou", "assets/images/lefou.gif"));
+    questionList.push(objConstructor("What other fictional character is Professor Ratigan based off of in The Great Mouse Detective", ["watson", "harry Potter", "moriarty", "elsa"], "moriarty", "assets/images/ratigan.gif"));
+    questionList.push(objConstructor("What is Jafar's relation to the Sultan in Aladdin", ["grand vizier", "hand of the king", "son-in-law", "best friend"], "grand vizier", "assets/images/jafar.gif"));
+    questionList.push(objConstructor("What animal is Prince John in Robin Hood", ["fox", "wolf", "lion", "vulture"], "lion", "assets/images/robinHoodKing.gif"));
+
 
 
     //function definitions
@@ -119,34 +129,25 @@ $(document).ready(function () {
 
     function clearQuestion() {
         $(".hiddenQuestion").css("display", "none");
-        // question.text("");
-        // choice1.text("");
-        // choice2.text("");
-        // choice3.text("");
-        // choice4.text("");
+        question.append(`<img class="img-fluid imgMax" src="${questionList[questionCount].image}"/>`)
+        setTimeout(changeQuestion, 5000);
     }
 
     function intermission(response) {
         if (response === "correct") {
             clearInterval(intervalId);
-            clearQuestion();
             question.html("<p>Correct!</p>");
-            question.append(`<img class="img-fluid" src="${questionList[questionCount].image}"/>`)
-            setTimeout(changeQuestion, 5000);
+            clearQuestion();
         }
         else if (response === "incorrect") {
             clearInterval(intervalId);
+            question.html(`<p>Nope!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice.charAt(0).toUpperCase()+questionList[questionCount].correctChoice.slice(1)}</p>`);
             clearQuestion();
-            question.html(`<p>Nope!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice}</p>`);
-            question.append(`<img class="img-fluid" src="${questionList[questionCount].image}"/>`)
-            setTimeout(changeQuestion, 5000);
         }
         else if (response === "unanswered") {
             clearInterval(intervalId);
+            question.html(`<p>Out of Time!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice.charAt(0).toUpperCase()+questionList[questionCount].correctChoice.slice(1)}</p>`)
             clearQuestion();
-            question.html(`<p>Out of Time!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice}</p>`)
-            question.append(`<img class="img-fluid" src="${questionList[questionCount].image}"/>`)
-            setTimeout(changeQuestion, 5000);
         }
 
     }
