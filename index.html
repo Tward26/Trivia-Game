@@ -4,30 +4,41 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Trivia Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Disney Villain Trivia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <div id="container">
-        <h1>Trivia Game</h1>
-        <div id="gameSpace">
-            <button id="startButton">Start</button>
-            <div id="questionSpace">
-                <p class="hidden">Time Remaining: <span id="timer"></span> seconds</p>
-                <p><span id="question"></span></p>
-                <p><span id="choice-1" class="choice"></span></p>
-                <p><span id="choice-2" class="choice"></span><br></p>
-                <p><span id="choice-3" class="choice"></span><br></p>
-                <p><span id="choice-4" class="choice"></span></p>
+    <div class="vertical-center">
+        <div class="container-fluid" id="container">
+            <div class="row ">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <h1>disney villain trivia</h1>
+                </div>
             </div>
-
-
+            <div class="row ">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <div id="gameSpace" class="text-center">
+                        <img class="img-fluid mx-auto mb-3" id="startImage" src="assets/images/hornedKing.gif"
+                            alt="Horned King from Black Cauldron">
+                        <button class="btn btn-dark" id="startButton">start</button>
+                        <div id="questionSpace" class="text-center">
+                            <p class="hiddenTimer">Time Remaining: <span id="timer"></span> seconds</p>
+                            <p><span id="question"></span></p>
+                            <ul class="hiddenQuestion">
+                                <li><button type='button' id="choice-1" class="btn btn-dark"></button></li>
+                                <li><button type='button' id="choice-2" class="btn btn-dark"></button></li>
+                                <li><button type='button' id="choice-3" class="btn btn-dark"></button></li>
+                                <li><button type='button' id="choice-4" class="btn btn-dark""></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="/assets/javascript/app.js"></script>
-</body>
-
-</html>
+</div>
+    <script src="/assets/javascript/app.js"> </script> </body> </html>

@@ -2,33 +2,70 @@
     box-sizing: border-box;
 }
 
+html,body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one 🙂       */
+    display: flex;
+    align-items: center;
+  }
+
+@font-face{
+    font-family: 'waltograph_uibold';
+    src: url('font/waltographui-webfont.woff2') format('woff2'),
+        url('font/waltographui-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1{
+    font-family: 'waltograph_uibold', serif;
+    font-weight:normal;
+    font-style:normal;
+    color: white;
+}
+
 body{
-    background-image: url("../images/skulls.png");
+    background-image: url("../images/background.jpg");
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 1.5em;
+    color: white;
+}
+
+#startImage{
+    display: block;
 }
 
 #container{
-    margin: 0 auto;
     text-align: center;
-    background: rgba(76, 175, 80, 0.5);
-    padding: 20px 150px 300px 150px;
+    background-image: url("../images/villains.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* padding: 20px 150px 300px 150px; */
+
 }
 
 #gameSpace{
-    margin: 0 auto;
+    background: rgba(76,61,104, 0.75);
+    /* margin: 0 auto; */
     text-align: center;
     width: 100%;
     padding-top: 50px;
+    min-height: 400px;
 }
 
-.hidden{
+.hiddenTimer{
     display: none;
 }
 
-.choice:hover{
-    border: 1px solid black;
-    background: blue;
-    opacity: 0.3;
-    cursor: pointer;
+.hiddenQuestion{
+    display: none;
 }
 
 .startOver:hover{
@@ -36,5 +73,22 @@ body{
     background: blue;
     opacity: 0.3;
     cursor: pointer;
+}
+
+ul{
+    list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li{
+    padding-bottom: 5px;
+}
+
+.btn{
+    min-width: 150px;
+    font-family: 'waltograph_uibold', serif;
+    font-weight:normal;
+    font-style:normal;
 }
 

@@ -20,9 +20,9 @@ $(document).ready(function () {
     //push objects into array using objConstructor function
 
     questionList.push(objConstructor("What is 1+1?", ["one", "two", "three", "four"], "two", "https://via.placeholder.com/150"));
-    questionList.push(objConstructor("What is the third letter of the alphabet?", ["A", "B", "C", "D"], "C", "https://via.placeholder.com/150"));
+    questionList.push(objConstructor("What is the third letter of the alphabet?", ["a", "b", "c", "d"], "c", "https://via.placeholder.com/150"));
     questionList.push(objConstructor("What color is the sky", ["blue", "potato", "green", "yes"], "blue", "https://via.placeholder.com/150"));
-    questionList.push(objConstructor("What is my name?", ["Frank", "Beans", "Hugo", "Tyler"], "Tyler", "https://via.placeholder.com/150"));
+    questionList.push(objConstructor("What is my name?", ["frank", "beans", "hugo", "tyler"], "tyler", "https://via.placeholder.com/150"));
 
 
     //function definitions
@@ -39,8 +39,10 @@ $(document).ready(function () {
     function startGame() {
         if (startVisible) {
             $("#startButton").css("display", "none");
+            $("#startImage").css("display", "none");
             startVisible = false;
-            $(".hidden").css("display", "block");
+            $(".hiddenTimer").css("display", "block");
+            $(".hiddenQuestion").css("display", "block");
         }
         resetClock();
         question.text(questionList[questionCount].question);
@@ -76,12 +78,13 @@ $(document).ready(function () {
     }
 
     function changeQuestion() {
+        $(".hiddenQuestion").css("display", "block");
         ++questionCount;
         if (questionCount === (questionList.length)) {
             clearInterval(intervalId);
             attach = $("#questionSpace").detach();
-            $("#gameSpace").html(`All done here's how you did!<p>Correct Answers: ${corrCount}</p><p>Incorrect Answers: ${incorrCount}</p><p>Unanswered: ${unansCount}</p>`);
-            var resetButton = $("<p>").text("Start Over?").addClass("startOver");
+            $("#gameSpace").html(`<p>All done here's how you did!</p><p>Correct Answers: ${corrCount}</p><p>Incorrect Answers: ${incorrCount}</p><p>Unanswered: ${unansCount}</p>`);
+            var resetButton = $("<button>").text("start over?").addClass("btn btn-dark");
             resetButton.click(function () {
                 resetGame();
             });
@@ -115,11 +118,12 @@ $(document).ready(function () {
     }
 
     function clearQuestion() {
-        question.text("");
-        choice1.text("");
-        choice2.text("");
-        choice3.text("");
-        choice4.text("");
+        $(".hiddenQuestion").css("display", "none");
+        // question.text("");
+        // choice1.text("");
+        // choice2.text("");
+        // choice3.text("");
+        // choice4.text("");
     }
 
     function intermission(response) {
@@ -127,21 +131,21 @@ $(document).ready(function () {
             clearInterval(intervalId);
             clearQuestion();
             question.html("<p>Correct!</p>");
-            question.append(`<img src="${questionList[questionCount].image}"/>`)
+            question.append(`<img class="img-fluid" src="${questionList[questionCount].image}"/>`)
             setTimeout(changeQuestion, 5000);
         }
         else if (response === "incorrect") {
             clearInterval(intervalId);
             clearQuestion();
             question.html(`<p>Nope!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice}</p>`);
-            question.append(`<img src="${questionList[questionCount].image}"/>`)
+            question.append(`<img class="img-fluid" src="${questionList[questionCount].image}"/>`)
             setTimeout(changeQuestion, 5000);
         }
         else if (response === "unanswered") {
             clearInterval(intervalId);
             clearQuestion();
             question.html(`<p>Out of Time!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice}</p>`)
-            question.append(`<img src="${questionList[questionCount].image}"/>`)
+            question.append(`<img class="img-fluid" src="${questionList[questionCount].image}"/>`)
             setTimeout(changeQuestion, 5000);
         }
 
