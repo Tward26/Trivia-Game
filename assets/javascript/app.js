@@ -19,29 +19,28 @@ $(document).ready(function () {
 
     //push objects into array using objConstructor function
 
-    questionList.push(objConstructor("Which hyena was Whoopi Goldberg the voice of in The Lion King?", ["shenzi", "banzai", "ed", "scar"], "shenzi", "assets/images/hyenas.gif"));
-    questionList.push(objConstructor("What other name does Dr. Facilier go by in the Princess and the Frog?", ["dr. voodoo", "mr. shadow", "shadow man", "chernabog"], "shadow man", "assets/images/drFacilier.gif"));
-    questionList.push(objConstructor("In Fantasia, what song is associated with Chernabog?", ["rite of spring", "night on bald mountain", "nutcracker suite", "sorcerer's apprentice"], "night on bald mountain", "assets/images/chernabog.gif"));
-    questionList.push(objConstructor("At the end of Emperor's New Groove, what animal does Yzma end up turned into?", ["llama", "alligator", "flea", "cat"], "cat", "assets/images/yzma.gif"));
-    questionList.push(objConstructor("Who is the god of the underworld in Hercules?", ["zeus", "apollo", "hades", "pan"], "hades", "assets/images/hades.gif"));
-    questionList.push(objConstructor("In Alice in Wonderland, what card suit was the Red Queen?", ["hearts", "spades", "diamonds", "clubs"], "hearts", "assets/images/redqueen.gif"));
-    questionList.push(objConstructor("What is Shere Khan afraid of in The Jungle Book?", ["humans", "bears", "thunder", "fire"], "fire", "assets/images/shereKhan.gif"));
-    questionList.push(objConstructor("What is the name of merlin's nemesis in The Sword in the Stone?", ["madame maleficent", "madame mim", "the crone", "wort"], "madame mim", "assets/images/madameMim.gif"));
-    questionList.push(objConstructor("Who is the poacher in Rescuers Down Under?", ["marahute", "joanna", "steven j. irwin", "percival c. mcleach"], "percival c. mcleach", "assets/images/mcleach.gif"));
-    questionList.push(objConstructor("What is the name of Gaston's sidekick in Beauty and the Beast", ["olaf", "lefou", "gaston jr.", "cogsworth"], "lefou", "assets/images/lefou.gif"));
-    questionList.push(objConstructor("What other fictional character is Professor Ratigan based off of in The Great Mouse Detective", ["watson", "harry Potter", "moriarty", "elsa"], "moriarty", "assets/images/ratigan.gif"));
-    questionList.push(objConstructor("What is Jafar's relation to the Sultan in Aladdin", ["grand vizier", "hand of the king", "son-in-law", "best friend"], "grand vizier", "assets/images/jafar.gif"));
-    questionList.push(objConstructor("What animal is Prince John in Robin Hood", ["fox", "wolf", "lion", "vulture"], "lion", "assets/images/robinHoodKing.gif"));
-
-
+    questionList.push(objConstructor("Which hyena was Whoopi Goldberg the voice of in <i>The Lion King</i>?", ["shenzi", "banzai", "ed", "scar"], "shenzi", "Shenzi", "assets/images/hyenas.gif"));
+    questionList.push(objConstructor("What other name does Dr. Facilier go by in <i>The Princess and the Frog</i>?", ["dr. voodoo", "mr. shadow", "shadow man", "chernabog"], "shadow man", "Shadow Man", "assets/images/drFacilier.gif"));
+    questionList.push(objConstructor("In <i>Fantasia</i>, what song is associated with Chernabog?", ["rite of spring", "night on bald mountain", "nutcracker suite", "sorcerer's apprentice"], "night on bald mountain", "Night on Bald Mountain", "assets/images/chernabog.gif"));
+    questionList.push(objConstructor("At the end of <i>Emperor's New Groove</i>, what animal does Yzma end up turned into?", ["llama", "alligator", "flea", "cat"], "cat", "Cat", "assets/images/yzma.gif"));
+    questionList.push(objConstructor("Who is the god of the underworld in <i>Hercules</i>?", ["zeus", "apollo", "hades", "pan"], "hades", "Hades", "assets/images/hades.gif"));
+    questionList.push(objConstructor("In <i>Alice in Wonderland</i>, what card suit was the Red Queen?", ["hearts", "spades", "diamonds", "clubs"], "hearts", "Hearts", "assets/images/redqueen.gif"));
+    questionList.push(objConstructor("What is Shere Khan afraid of in <i>The Jungle Book</i>?", ["humans", "bears", "thunder", "fire"], "fire", "Fire", "assets/images/shereKhan.gif"));
+    questionList.push(objConstructor("What is the name of merlin's nemesis in <i>The Sword in the Stone</i>?", ["madame maleficent", "madame mim", "the crone", "wort"], "madame mim", "Madame Mim", "assets/images/madameMim.gif"));
+    questionList.push(objConstructor("Who is the poacher in <i>Rescuers Down Under</i>?", ["marahute", "joanna", "steven j. irwin", "percival c. mcleach"], "percival c. mcleach", "Percival C. McLeach", "assets/images/mcleach.gif"));
+    questionList.push(objConstructor("What is the name of Gaston's sidekick in <i>Beauty and the Beast</i>", ["olaf", "lefou", "gaston jr.", "cogsworth"], "lefou", "LeFou", "assets/images/lefou.gif"));
+    questionList.push(objConstructor("What other fictional character is Professor Ratigan based off of in <i>The Great Mouse Detective</i>", ["watson", "harry potter", "moriarty", "elsa"], "moriarty", "Moriarty", "assets/images/ratigan.gif"));
+    questionList.push(objConstructor("What is Jafar's relation to the Sultan in <i>Aladdin</i>", ["grand vizier", "hand of the king", "son-in-law", "best friend"], "grand vizier", "Grand Vizier", "assets/images/jafar.gif"));
+    questionList.push(objConstructor("What animal is Prince John in <i>Robin Hood</i>", ["fox", "wolf", "lion", "vulture"], "lion", "Lion", "assets/images/robinHoodKing.gif"));
 
     //function definitions
 
-    function objConstructor(question, choices, correctChoice, image) {
+    function objConstructor(question, choices, correctChoice, correctCap, image) {
         return {
             question: question,
             choices: choices,
             correctChoice: correctChoice,
+            correctCap: correctCap,
             image: image
         }
     }
@@ -55,7 +54,7 @@ $(document).ready(function () {
             $(".hiddenQuestion").css("display", "block");
         }
         resetClock();
-        question.text(questionList[questionCount].question);
+        question.html(questionList[questionCount].question);
         choice1.text(questionList[questionCount].choices[0]);
         choice2.text(questionList[questionCount].choices[1]);
         choice3.text(questionList[questionCount].choices[2]);
@@ -93,7 +92,7 @@ $(document).ready(function () {
         if (questionCount === (questionList.length)) {
             clearInterval(intervalId);
             attach = $("#questionSpace").detach();
-            $("#gameSpace").html(`<p>All done here's how you did!</p><p>Correct Answers: ${corrCount}</p><p>Incorrect Answers: ${incorrCount}</p><p>Unanswered: ${unansCount}</p>`);
+            $("#gameSpace").html(`<p>Game Over</p><p>Here's how you did!</p><p>Correct Answers: ${corrCount}</p><p>Incorrect Answers: ${incorrCount}</p><p>Unanswered: ${unansCount}</p>`);
             var resetButton = $("<button>").text("start over?").addClass("btn btn-dark");
             resetButton.click(function () {
                 resetGame();
@@ -103,7 +102,7 @@ $(document).ready(function () {
         }
         else {
             resetClock();
-            question.text(questionList[questionCount].question);
+            question.html(questionList[questionCount].question);
             choice1.text(questionList[questionCount].choices[0]);
             choice2.text(questionList[questionCount].choices[1]);
             choice3.text(questionList[questionCount].choices[2]);
@@ -141,12 +140,12 @@ $(document).ready(function () {
         }
         else if (response === "incorrect") {
             clearInterval(intervalId);
-            question.html(`<p>Nope!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice.charAt(0).toUpperCase()+questionList[questionCount].correctChoice.slice(1)}</p>`);
+            question.html(`<p>Nope!</p><p>The Correct Answer was: ${questionList[questionCount].correctCap}</p>`);
             clearQuestion();
         }
         else if (response === "unanswered") {
             clearInterval(intervalId);
-            question.html(`<p>Out of Time!</p><p>The Correct Answer was: ${questionList[questionCount].correctChoice.charAt(0).toUpperCase()+questionList[questionCount].correctChoice.slice(1)}</p>`)
+            question.html(`<p>Out of Time!</p><p>The Correct Answer was: ${questionList[questionCount].correctCap}</p>`)
             clearQuestion();
         }
 
