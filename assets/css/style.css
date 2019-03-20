@@ -52,11 +52,10 @@ body{
 }
 
 #gameSpace{
-    background: rgba(76,61,104, 0.75);
+    background: rgba(76,61,104, 0.90);
     /* margin: 0 auto; */
-    text-align: center;
     width: 100%;
-    padding-top: 50px;
+    padding-top: 25px;
     min-height: 400px;
 }
 
