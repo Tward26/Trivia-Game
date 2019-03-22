@@ -1,10 +1,11 @@
+//waits for document to load before JS does anything
 $(document).ready(function () {
 
     //variable declaration
     var corrCount = 0;
     var incorrCount = 0;
     var unansCount = 0;
-    questionCount = 0;
+    var questionCount = -1;
     var questionList = [];
     var question = $("#question");
     var choice1 = $("#choice-1");
@@ -22,16 +23,16 @@ $(document).ready(function () {
     questionList.push(objConstructor("Which hyena was Whoopi Goldberg the voice of in <i>The Lion King</i>?", ["shenzi", "banzai", "ed", "scar"], "shenzi", "Shenzi", "assets/images/hyenas.gif"));
     questionList.push(objConstructor("What other name does Dr. Facilier go by in <i>The Princess and the Frog</i>?", ["dr. voodoo", "mr. shadow", "shadow man", "chernabog"], "shadow man", "Shadow Man", "assets/images/drFacilier.gif"));
     questionList.push(objConstructor("In <i>Fantasia</i>, what song is associated with Chernabog?", ["rite of spring", "night on bald mountain", "nutcracker suite", "sorcerer's apprentice"], "night on bald mountain", "Night on Bald Mountain", "assets/images/chernabog.gif"));
-    questionList.push(objConstructor("At the end of <i>Emperor's New Groove</i>, what animal does Yzma end up turned into?", ["llama", "alligator", "flea", "cat"], "cat", "Cat", "assets/images/yzma.gif"));
+    questionList.push(objConstructor("At the end of <i>Emperor's New Groove</i>, what animal does Yzma get turned into?", ["llama", "alligator", "flea", "cat"], "cat", "Cat", "assets/images/yzma.gif"));
     questionList.push(objConstructor("Who is the god of the underworld in <i>Hercules</i>?", ["zeus", "apollo", "hades", "pan"], "hades", "Hades", "assets/images/hades.gif"));
     questionList.push(objConstructor("In <i>Alice in Wonderland</i>, what card suit was the Red Queen?", ["hearts", "spades", "diamonds", "clubs"], "hearts", "Hearts", "assets/images/redqueen.gif"));
     questionList.push(objConstructor("What is Shere Khan afraid of in <i>The Jungle Book</i>?", ["humans", "bears", "thunder", "fire"], "fire", "Fire", "assets/images/shereKhan.gif"));
     questionList.push(objConstructor("What is the name of merlin's nemesis in <i>The Sword in the Stone</i>?", ["madame maleficent", "madame mim", "the crone", "wort"], "madame mim", "Madame Mim", "assets/images/madameMim.gif"));
     questionList.push(objConstructor("Who is the poacher in <i>Rescuers Down Under</i>?", ["marahute", "joanna", "steven j. irwin", "percival c. mcleach"], "percival c. mcleach", "Percival C. McLeach", "assets/images/mcleach.gif"));
-    questionList.push(objConstructor("What is the name of Gaston's sidekick in <i>Beauty and the Beast</i>", ["olaf", "lefou", "gaston jr.", "cogsworth"], "lefou", "LeFou", "assets/images/lefou.gif"));
-    questionList.push(objConstructor("What other fictional character is Professor Ratigan based off of in <i>The Great Mouse Detective</i>", ["watson", "harry potter", "moriarty", "elsa"], "moriarty", "Moriarty", "assets/images/ratigan.gif"));
-    questionList.push(objConstructor("What is Jafar's relation to the Sultan in <i>Aladdin</i>", ["grand vizier", "hand of the king", "son-in-law", "best friend"], "grand vizier", "Grand Vizier", "assets/images/jafar.gif"));
-    questionList.push(objConstructor("What animal is Prince John in <i>Robin Hood</i>", ["fox", "wolf", "lion", "vulture"], "lion", "Lion", "assets/images/robinHoodKing.gif"));
+    questionList.push(objConstructor("What is the name of Gaston's sidekick in <i>Beauty and the Beast</i>>", ["olaf", "lefou", "gaston jr.", "cogsworth"], "lefou", "LeFou", "assets/images/lefou.gif"));
+    questionList.push(objConstructor("What other fictional character is Professor Ratigan based off of in <i>The Great Mouse Detective</i>?", ["watson", "harry potter", "moriarty", "elsa"], "moriarty", "Moriarty", "assets/images/ratigan.gif"));
+    questionList.push(objConstructor("What is Jafar's relation to the Sultan in <i>Aladdin</i>?", ["grand vizier", "hand of the king", "son-in-law", "best friend"], "grand vizier", "Grand Vizier", "assets/images/jafar.gif"));
+    questionList.push(objConstructor("What animal is Prince John in <i>Robin Hood</i>?", ["fox", "wolf", "lion", "vulture"], "lion", "Lion", "assets/images/robinHoodKing.gif"));
 
     //function definitions
 
@@ -53,19 +54,14 @@ $(document).ready(function () {
             $(".hiddenTimer").css("display", "block");
             $(".hiddenQuestion").css("display", "block");
         }
-        resetClock();
-        question.html(questionList[questionCount].question);
-        choice1.text(questionList[questionCount].choices[0]);
-        choice2.text(questionList[questionCount].choices[1]);
-        choice3.text(questionList[questionCount].choices[2]);
-        choice4.text(questionList[questionCount].choices[3]);
+        changeQuestion();
     }
 
     function resetGame() {
         corrCount = 0;
         incorrCount = 0;
         unansCount = 0;
-        questionCount = 0;
+        questionCount = -1;
         $("#gameSpace").empty();
         $("#gameSpace").append(attach);
         startGame();
@@ -126,12 +122,7 @@ $(document).ready(function () {
         }
     }
 
-    function clearQuestion() {
-        $(".hiddenQuestion").css("display", "none");
-        question.append(`<img class="img-fluid imgMax" src="${questionList[questionCount].image}"/>`)
-        setTimeout(changeQuestion, 5000);
-    }
-
+    
     function intermission(response) {
         if (response === "correct") {
             clearInterval(intervalId);
@@ -148,11 +139,16 @@ $(document).ready(function () {
             question.html(`<p>Out of Time!</p><p>The Correct Answer was: ${questionList[questionCount].correctCap}</p>`)
             clearQuestion();
         }
-
+        
     }
-
-
-    // on click functionality
+    
+    function clearQuestion() {
+        $(".hiddenQuestion").css("display", "none");
+        question.append(`<img class="img-fluid imgMax" src="${questionList[questionCount].image}"/>`)
+        setTimeout(changeQuestion, 5000);
+    }
+    
+// on click functionality
 
     $("#startButton").click(function () {
         startGame();
