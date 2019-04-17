@@ -2,6 +2,9 @@
 
 *Jquery Trivia based game using setTimeouts and intervals*
 
+##Link to deployed project:
+https://tward26.github.io/TriviaGame/
+
 ## Purpose:
 Using the jQuery library, I wanted to test out using setTimeouts and intervals to practice asychronous calls in JS. The game served as a means to do this while also providing a fun example of my skills to date.
 
