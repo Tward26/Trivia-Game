@@ -2,7 +2,7 @@
 
 *Jquery Trivia based game using setTimeouts and intervals*
 
-##Link to deployed project:
+## Link to deployed project:
 https://tward26.github.io/TriviaGame/
 
 ## Purpose:
